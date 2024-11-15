@@ -35,6 +35,7 @@ public class TRES_EN_RAYA {
                 case '1':
                     System.out.println("Has seleccionado 1vs1");
                     intercambioPosicion(); //llamamos al metodo logica juego para que muestre la puntuación en pantalla
+                    seleccionJugada();
                     break;
                 case '2':
                     System.out.println("Has seleccionado 1 vs maquina");
@@ -50,21 +51,22 @@ public class TRES_EN_RAYA {
             }
         }
         System.out.println("Gracias por jugar. ¡Hasta la próxima!");
+        sc.close();
     }
 //metodo para mostrar la puntuación en pantalla
 
-    public static void estadoPartida(char[] posiciones) {
+    public static void estadoPartida(char[] posicion) {
         
         //asignamos los valores del array para mostrarlos en pantalla
-        char x1 = posiciones[0]; 
-        char x2 = posiciones[1]; 
-        char x3 = posiciones[2]; 
-        char x4 = posiciones[3]; 
-        char x5 = posiciones[4]; 
-        char x6 = posiciones[5]; 
-        char x7 = posiciones[6]; 
-        char x8 = posiciones[7]; 
-        char x9 = posiciones[8];
+        char x1 = posicion[0]; 
+        char x2 = posicion[1]; 
+        char x3 = posicion[2]; 
+        char x4 = posicion[3]; 
+        char x5 = posicion[4]; 
+        char x6 = posicion[5]; 
+        char x7 = posicion[6]; 
+        char x8 = posicion[7]; 
+        char x9 = posicion[8];
         
         //componemos el mensaje que mostrara el estado de la partida
         System.out.println("\nEstado partida:\n\n   " + x1 + " | " + x2 + " | " + x3 + "\n -------------" + "\n   " + x4 + " | " + x5 + " | " + x6 + "\n -------------" + "\n   " + x7 + " | " + x8 + " | " + x9 + "\n");
@@ -76,11 +78,11 @@ public class TRES_EN_RAYA {
         //valores de prueba que despues se tomaran de otro metodo
         char jugador1 = '2';
         char jugador2 = '6';
-        
+        char maquina = '8';
         //intercambio de valores para buscar en el array
         char x = jugador1;
         char o = jugador2;
-        
+        char y = maquina;
         //array que usaremos para las posiciones dentro del tablero.
         char[] posicion = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
         //recorremos el array con el bucle, para buscar la seleccion del jugador e intercambiarla con su ficha
@@ -93,5 +95,16 @@ public class TRES_EN_RAYA {
         estadoPartida(posicion);
 
     }
+     public static void seleccionJugada(){
+         
+         Scanner sc = new Scanner(System.in);
+         //preguntar por la jugada a seleccionar
+         System.out.println("Jugador 1, escoge posición en el tablero! (1-9)");
+         String jugada = sc.next();
+         char j1posicion = jugada.charAt(0);
+         
+         //comprobar si esa jugada es correcta
+         //ver si la posicion escogida no esta tomada de antes
+     }
 
 }
