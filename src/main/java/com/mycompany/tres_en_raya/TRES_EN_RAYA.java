@@ -20,6 +20,9 @@ import java.util.Scanner;
  */
 public class TRES_EN_RAYA {
 
+    //array que usaremos para las posiciones dentro del tablero.
+    static char[] posicion = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        
     public static void main(String[] args) {
 
         boolean continuar = true; //inicializamos el controlador de nuestro buble
@@ -32,14 +35,14 @@ public class TRES_EN_RAYA {
             String palabra = sc.next(); //escaneamos la palabra de usuario ya que no podemos recoger directamente un char
             char eleccionJuego = palabra.charAt(0); //sacamos el primer caracter del string
             switch (eleccionJuego) {
-                case '1':
+                case '1': //jugador vs jugador
                     System.out.println("Has seleccionado 1vs1");
-                    intercambioPosicion(); //llamamos al metodo logica juego para que muestre la puntuación en pantalla
                     seleccionJugada();
+                    intercambioPosicion(); //esta fallando porue no puede acceder al la eleccion jugador uno.
+                    estadoPartida(); //llamamos al metodo logica juego para que muestre la puntuación en pantalla
                     break;
-                case '2':
+                case '2': //jugador vs maquina.
                     System.out.println("Has seleccionado 1 vs maquina");
-                    intercambioPosicion(); 
                     break;
                 case '3':
                     System.out.println("Has seleccionado salir");
@@ -55,7 +58,7 @@ public class TRES_EN_RAYA {
     }
 //metodo para mostrar la puntuación en pantalla
 
-    public static void estadoPartida(char[] posicion) {
+    public static void estadoPartida() {
         
         //asignamos los valores del array para mostrarlos en pantalla
         char x1 = posicion[0]; 
@@ -73,18 +76,17 @@ public class TRES_EN_RAYA {
     }
     
 //metodo donde va la logica del juego
-    public static void intercambioPosicion(j1posicion) {
+    public static void intercambioPosicion(char j1posicion) {
         
         //valores de prueba que despues se tomaran de otro metodo
-        char jugador1 = '2';
         char jugador2 = '6';
         char maquina = '8';
+        
         //intercambio de valores para buscar en el array
-        char x = jugador1;
+        char x = j1posicion;
         char o = jugador2;
         char y = maquina;
-        //array que usaremos para las posiciones dentro del tablero.
-        char[] posicion = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        
         //recorremos el array con el bucle, para buscar la seleccion del jugador e intercambiarla con su ficha
         for(int i = 0; i < posicion.length; i++) {
             if (posicion[i] == x) {
@@ -92,7 +94,7 @@ public class TRES_EN_RAYA {
             }
         }
         //llamamos al metodo estado partida y le pasamos el array
-        estadoPartida(posicion);
+        estadoPartida();
 
     }
      public static void seleccionJugada(){
@@ -101,7 +103,7 @@ public class TRES_EN_RAYA {
          //preguntar por la jugada a seleccionar
          System.out.println("Jugador 1, escoge posición en el tablero! (1-9)");
          String jugada = sc.next();
-         char j1posicion = jugada.charAt(0);
+         char j1posicion = jugada.charAt(0); //pendiente sacar la eleccion de jugadores/maquina fuera de un metodo que no sea el main para que los demas metodos puedan acceder a el.
          System.out.println("Hola");
          //comprobar si esa jugada es correcta
          //ver si la posicion escogida no esta tomada de antes
