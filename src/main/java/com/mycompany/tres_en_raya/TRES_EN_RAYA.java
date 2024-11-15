@@ -73,7 +73,7 @@ public class TRES_EN_RAYA {
     }
     
 //metodo donde va la logica del juego
-    public static void intercambioPosicion() {
+    public static void intercambioPosicion(j1posicion) {
         
         //valores de prueba que despues se tomaran de otro metodo
         char jugador1 = '2';
@@ -102,7 +102,7 @@ public class TRES_EN_RAYA {
          System.out.println("Jugador 1, escoge posición en el tablero! (1-9)");
          String jugada = sc.next();
          char j1posicion = jugada.charAt(0);
-         
+         System.out.println("Hola");
          //comprobar si esa jugada es correcta
          //ver si la posicion escogida no esta tomada de antes
      }
