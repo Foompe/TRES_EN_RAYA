@@ -45,6 +45,9 @@ public class TRES_EN_RAYA {
                     
                     //falta meter un buble (con controlador de ganador)
                     estadoPartida(posicion); 
+                    
+                    //meter aqui un bucle
+                    
                     //Escoge jugador 1
                     System.out.println("Jugador 1, escoge posición en el tablero! (1-9)");
                     String j1jugada = sc.next();
@@ -68,7 +71,6 @@ public class TRES_EN_RAYA {
                     System.out.println("no entra al bucle");
                     
                     
-                    //pendientes: bucle, hacer turnos.
                     break;
                 case '2': //jugador vs maquina.
                     System.out.println("Has seleccionado 1 vs maquina");
