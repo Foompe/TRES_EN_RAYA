@@ -19,9 +19,6 @@ import java.util.Scanner;
  * un jugador, la máquina elegirá su posición aleatoriamente.
  */
 public class TRES_EN_RAYA {
-
-    //array que usaremos para las posiciones dentro del tablero.
-
         
     public static void main(String[] args) {
         boolean jugadaAceptada;
@@ -37,8 +34,10 @@ public class TRES_EN_RAYA {
             
             
             System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n (2) Jugar 1 jugador. \n (3) Salir.");
-            String palabra = sc.next(); //escaneamos la palabra de usuario ya que no podemos recoger directamente un char
-            char eleccionJuego = palabra.charAt(0); //sacamos el primer caracter del string
+            //escaneamos la palabra de usuario ya que no podemos recoger directamente un char
+            String palabra = sc.next(); 
+            //sacamos el primer caracter del string
+            char eleccionJuego = palabra.charAt(0); 
             switch (eleccionJuego) {
                 case '1': //jugador vs jugador
                     System.out.println("Has seleccionado 1vs1");
@@ -114,6 +113,11 @@ public class TRES_EN_RAYA {
     
     //metodo para comprobar que la posicion escogida no esta ocupada
     public static boolean comprobarJugada(char[] posicion, char j1posicion, char j2posicion) {
+        
+        //Primero vamos a convertir los caracteres que escogen los jugadores a un int
+        int j1 = j1posicion - '0'; //con esto estamos restando el valor en Unicode de 0 resultando en el valor entero
+        int j2 = j2posicion - '0'; //
+        
         /**
          * A corregir:
          *  comprobar que los valores de lo jugadores esten dentro del rango
@@ -121,14 +125,14 @@ public class TRES_EN_RAYA {
          *  hacer coincidir la eleccion del jugador con su posicion dentro del indice del array
          *  comprobar que el valor que posee el indice no sea ni una 'X' ni una 'O'
          *  retornar el valor para poder continuar
-         */
+        */
         //creamos un validador de jugada
         boolean jugadaValida = true;
         
         //comparamos las jugadas
         if (j1posicion != j2posicion) {
              
-             //recorremos el array
+            //recorremos el array
             for(int i = 0; i < posicion.length; i++) {
                 
                 //buscamos si esta libre la posicion elegida(si no, suponemos o que esta ocupada o no es un valor correcto)
@@ -145,7 +149,6 @@ public class TRES_EN_RAYA {
              System.out.println("No valido la selección es la misma! Intentalo de nuevo!");
              jugadaValida = false;
         }
-        
         //devolvemos el valor del validador de jugada
         return jugadaValida;
     }    
