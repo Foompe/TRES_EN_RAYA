@@ -19,6 +19,11 @@ import java.util.Scanner;
  * un jugador, la máquina elegirá su posición aleatoriamente.
  */
 public class TRES_EN_RAYA {
+    
+    
+        //creamos al array con las posiciones dentro del tablero
+        static char[] posicion = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        
         
     public static void main(String[] args) {
         boolean jugadaAceptada;
@@ -29,8 +34,7 @@ public class TRES_EN_RAYA {
 
         while (continuar) {
             
-            //creamos al array con las posiciones dentro del tablero
-            char[] posicion = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+            
             
             
             System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n (2) Jugar 1 jugador. \n (3) Salir.");
@@ -51,12 +55,14 @@ public class TRES_EN_RAYA {
                     System.out.println("Jugador 1, escoge posición en el tablero! (1-9)");
                     String j1jugada = sc.next();
                     char j1posicion = j1jugada.charAt(0);
-                   
+                    jugadaAceptada = comprobarJugada(j1posicion);
+                    
                     //jugador dos escoge
                     System.out.println("Jugador 2, escoge posición en el tablero! (1-9)");
                     String j2jugada = sc.next();
                     char j2posicion = j2jugada.charAt(0);
-                    jugadaAceptada = comprobarJugada(posicion, j1posicion, j2posicion);
+                    
+                    
                     
                     //en funcion de si la seleccion es correcta continuaremos con la jugada.
                     if (jugadaAceptada){
@@ -112,12 +118,24 @@ public class TRES_EN_RAYA {
     
     
     //metodo para comprobar que la posicion escogida no esta ocupada
-    public static boolean comprobarJugada(char[] posicion, char j1posicion, char j2posicion) {
+    public static boolean comprobarJugada(char posicionJugador) {
+       
+        //creamos un validador de jugada
+        boolean jugadaValida = true;
         
-        //Primero vamos a convertir los caracteres que escogen los jugadores a un int
-        int j1 = j1posicion - '0'; //con esto estamos restando el valor en Unicode de 0 resultando en el valor entero
-        int j2 = j2posicion - '0'; //
+//Primero vamos a convertir los caracteres que escogen los jugadores a un int
+        int numeroPosicion = posicionJugador - '0'; //con esto estamos restando el valor en Unicode de 0 resultando en el valor entero
         
+        for(int i = 0; i < posicion.length; i++) {
+        if (i == (numeroPosicion - 1)) {
+            if (posicion[i] == numeroPosicion) {
+                System.out.println("Jugada correcta!");
+            } else {
+                jugadaValida = false; 
+                System.out.println("Jugada incorrecta!");
+            }
+        }
+        }
         /**
          * A corregir:
          *  comprobar que los valores de lo jugadores esten dentro del rango
@@ -126,14 +144,21 @@ public class TRES_EN_RAYA {
          *  comprobar que el valor que posee el indice no sea ni una 'X' ni una 'O'
          *  retornar el valor para poder continuar
         */
-        //creamos un validador de jugada
-        boolean jugadaValida = true;
+        
         
         //comparamos las jugadas
-        if (j1posicion != j2posicion) {
+        /*if (j1posicion != j2posicion) {
              
             //recorremos el array
             for(int i = 0; i < posicion.length; i++) {
+                if (i == (j1 - 1)) {
+                    if ((posicion[i] == 'X') && (posicion[i] == 'O')) {
+                        
+                    }
+                }
+                
+                
+                
                 
                 //buscamos si esta libre la posicion elegida(si no, suponemos o que esta ocupada o no es un valor correcto)
                 if(posicion[i] == j1posicion) {
@@ -148,7 +173,7 @@ public class TRES_EN_RAYA {
         } else {
              System.out.println("No valido la selección es la misma! Intentalo de nuevo!");
              jugadaValida = false;
-        }
+        }*/
         //devolvemos el valor del validador de jugada
         return jugadaValida;
     }    
