@@ -56,21 +56,47 @@ public class TRES_EN_RAYA {
                             String j1jugada = sc.next();
                             char j1posicion = j1jugada.charAt(0);
                             jugadaAceptada = comprobarJugada(j1posicion);
-                            intercambioPosicionX(j1posicion);
-                            ganador = finPartida(j1posicion);
+                            
+                            //Si la jugada es correcta, se pone la posicion en el tablero
+                            if (jugadaAceptada) {
+                                intercambioPosicionX(j1posicion);
+                                estadoPartida(posicion);
+                                ganador = finPartida(j1posicion);
+                                
+                                //Si se confima que hay tres en raya muestra el mensaje de ganador.
+                                if (ganador) {
+                                    System.out.println("Jugador uno gana la partida!!");
+                                }
+                            }
                         }
 
-                        if (jugadaAceptada & !ganador) {
+                        if (jugadaAceptada && !ganador) {
+                            
+                            //reinicio el valor de jugada aceptada para el jugador 2
                             jugadaAceptada = false;
+                            System.out.println("antes del bucle: " + jugadaAceptada);
                             while (!jugadaAceptada) {
                                 //jugador dos escoge
                                 System.out.println("Jugador 2, escoge posición en el tablero! (1-9)");
                                 String j2jugada = sc.next();
                                 char j2posicion = j2jugada.charAt(0);
+                                System.out.println("Valor de jugadaAceptada antes de comprobar: " + jugadaAceptada);
                                 jugadaAceptada = comprobarJugada(j2posicion);
-                                intercambioPosicionO(j2posicion);
-                                ganador = finPartida(j2posicion);
+                                
+                                if (jugadaAceptada) {
+                                    System.out.println("Jugador 2 ha hecho una jugada aceptada en la posición: " + j2posicion);
+                                    intercambioPosicionO(j2posicion);
+                                    estadoPartida(posicion);
+                                    ganador = finPartida(j2posicion);
+                                    System.out.println("Estado después de comprobar ganador: jugadaAceptada = " + jugadaAceptada + ", ganador = " + ganador);
+                                    
+                                    if (ganador) {
+                                        System.out.println("Jugador dos gana la partida!!");
+                                    }
+                                }
+                                System.out.println("Estado al final del bucle: jugadaAceptada = " + jugadaAceptada);
                             }
+                            System.out.println("Bucle terminado: jugadaAceptada = " + jugadaAceptada + ", ganador = " + ganador);
                         }
                     }
                     //en funcion de si la seleccion es correcta continuaremos con la jugada.
@@ -97,13 +123,18 @@ public class TRES_EN_RAYA {
 
     //metodo para comprobar que la posicion escogida no esta ocupada
     public static boolean comprobarJugada(char posicionJugador) {
-        //Pediente!! Comprobar si el valor esta dentro de los limites.
         
+        //Pediente!! Comprobar si el valor esta dentro de los limites.
+        if ((posicionJugador == '1') | (posicionJugador == '2') | (posicionJugador == '3') | (posicionJugador == '4') | (posicionJugador == '5') | (posicionJugador == '6') | (posicionJugador == '7') | (posicionJugador == '8') | (posicionJugador == '9')) {            
+        } else {
+            System.out.println("El valor escogido no es correcto! Selecciona de nuevo");
+            return false;
+        }
         
         
         //Convertimos char a int
-        int numeroPosicion = posicionJugador - '0';
-
+        int numeroPosicion = posicionJugador - '0';        
+        
         //Recorremos el bucle
         for (int i = 0; i < posicion.length; i++) {
 
