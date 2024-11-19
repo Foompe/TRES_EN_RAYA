@@ -31,10 +31,11 @@ public class TRES_EN_RAYA {
         System.out.println("Bienvenido a tres en raya");
 
         while (continuar) {
-
-            //
-            boolean jugadaAceptada = false;
+            
             boolean ganador = false;
+            
+            //Crear un metodo que resetee los valores del array
+            reset();
 
             System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n (2) Jugar 1 jugador. \n (3) Salir.");
             //escaneamos la palabra de usuario ya que no podemos recoger directamente un char
@@ -50,6 +51,7 @@ public class TRES_EN_RAYA {
 
                     //Bucle, cuando el metodo ganador detecte que un jugador ha ganado hara terminar la partida
                     while (!ganador) {
+                        boolean jugadaAceptada = false;
                         while (!jugadaAceptada) {
                             //Escoge jugador 1
                             System.out.println("Jugador 1, escoge posición en el tablero! (1-9)");
@@ -74,29 +76,23 @@ public class TRES_EN_RAYA {
                             
                             //reinicio el valor de jugada aceptada para el jugador 2
                             jugadaAceptada = false;
-                            System.out.println("antes del bucle: " + jugadaAceptada);
                             while (!jugadaAceptada) {
                                 //jugador dos escoge
                                 System.out.println("Jugador 2, escoge posición en el tablero! (1-9)");
                                 String j2jugada = sc.next();
                                 char j2posicion = j2jugada.charAt(0);
-                                System.out.println("Valor de jugadaAceptada antes de comprobar: " + jugadaAceptada);
                                 jugadaAceptada = comprobarJugada(j2posicion);
                                 
                                 if (jugadaAceptada) {
-                                    System.out.println("Jugador 2 ha hecho una jugada aceptada en la posición: " + j2posicion);
                                     intercambioPosicionO(j2posicion);
                                     estadoPartida(posicion);
                                     ganador = finPartida(j2posicion);
-                                    System.out.println("Estado después de comprobar ganador: jugadaAceptada = " + jugadaAceptada + ", ganador = " + ganador);
                                     
                                     if (ganador) {
                                         System.out.println("Jugador dos gana la partida!!");
                                     }
                                 }
-                                System.out.println("Estado al final del bucle: jugadaAceptada = " + jugadaAceptada);
                             }
-                            System.out.println("Bucle terminado: jugadaAceptada = " + jugadaAceptada + ", ganador = " + ganador);
                         }
                     }
                     //en funcion de si la seleccion es correcta continuaremos con la jugada.
@@ -180,37 +176,52 @@ public class TRES_EN_RAYA {
         //comprobar que es tres en raya o que no quedan mas sitios libres y por ende es empate
         //Comprobamos si en la primera linea horizontal son todos X u O 
         if ((posicion[0] == posicion[1]) && (posicion[1] == posicion[2]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+            System.out.println("Tres en raya! En la primera fila horizontal.");
             return true;
             //comprobamos la segunda fila horizontal    
         } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+            System.out.println("Tres en raya! En la segunda fila horizontal.");
             return true;
             //comprobamos la tercera fila horizontal
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[6] == posicion[7]) && (posicion[7] == posicion[8]) && (posicion[6] == 'X' || posicion[6] == 'O')) {
+            System.out.println("Tres en raya! En la tercera fila horizontal.");
             return true;
             //comprobamos la primera fila vertical
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[0] == posicion[3]) && (posicion[3] == posicion[6]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+            System.out.println("Tres en raya! En la primera fila vetical.");
             return true;
             //comprobamos la segunda fila vertical
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[1] == posicion[4]) && (posicion[4] == posicion[7]) && (posicion[1] == 'X' || posicion[1] == 'O')) {
+            System.out.println("Tres en raya! En la segunda fila vetical.");
             return true;
             //comprobamos la tercera fila vertical
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[2] == posicion[5]) && (posicion[5] == posicion[8]) && (posicion[2] == 'X' || posicion[2] == 'O')) {
+            System.out.println("Tres en raya! En la tercera fila vetical.");
             return true;
             //comprobamos una diagonal
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[0] == posicion[4]) && (posicion[4] == posicion[8]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+            System.out.println("Tres en raya! En la diagonal descendente.");
             return true;
             //comprobamos la segunda diagonal
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[2] == posicion[4]) && (posicion[4] == posicion[6]) && (posicion[2] == 'X' || posicion[2] == 'O')) {
+            System.out.println("Tres en raya! En la diagonal ascendente.");
             return true;
         }
-            //comprobar si quedan posiciones libres
+            //comprobar si quedan posiciones libres (no esta entrando en el bucle cuando esta todo ocupado
         for (int i = 0; i < posicion.length; i++) {
             //comprobamos si en la posicion del array hay una x u o, si no hay podemos continuar la partida
             if (!((posicion[i] == 'X') | (posicion[i] == 'O'))) { 
                 return false; 
             }
         }
-        System.out.println("Error en busqueda de tres en raya");
+        System.out.println("Empate! no quedan posiciones libres.");
         return true;
+    }
+    
+    //metodo para resetear los valores del array para poder jugar mas de una partida
+    public static void reset() {
+        for (int i = 0; i < posicion.length; i++) {
+            posicion[i] = (char) ((i + 1) + '0');
+        }
     }
 }
