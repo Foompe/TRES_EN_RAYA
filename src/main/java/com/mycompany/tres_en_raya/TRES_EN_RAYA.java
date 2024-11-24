@@ -33,7 +33,8 @@ public class TRES_EN_RAYA {
             //metodo para resetear los valores
             reset();
 
-            System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n (2) Jugar 1 jugador (contra la máquina) \n (3) Salir.");
+            System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n"
+                    + " (2) Jugar 1 jugador (contra la máquina) \n (3) Salir.");
             //Tomamos la eleccion
             int eleccionJuego = sc.nextInt();
 
@@ -213,7 +214,12 @@ public class TRES_EN_RAYA {
 
     //metodo para mostrar la puntuación en pantalla (¿es necesario?)
     public static void estadoPartida(char[] posicion) {
-        System.out.println("\nEstado partida:\n\n   " + posicion[0] + " | " + posicion[1] + " | " + posicion[2] + "\n -------------" + "\n   " + posicion[3] + " | " + posicion[4] + " | " + posicion[5] + "\n -------------" + "\n   " + posicion[6] + " | " + posicion[7] + " | " + posicion[8] + "\n");
+        System.out.println("\nEstado partida:\n\n   " + posicion[0] 
+                + " | " + posicion[1] + " | " + posicion[2] 
+                + "\n -------------" + "\n   " + posicion[3] 
+                + " | " + posicion[4] + " | " + posicion[5] 
+                + "\n -------------" + "\n   " + posicion[6] 
+                + " | " + posicion[7] + " | " + posicion[8] + "\n");
     }
 
     //metodo que comprueba que la longitud del string tomado al jugador no supere un caracter
@@ -230,7 +236,11 @@ public class TRES_EN_RAYA {
     public static boolean comprobarJugada(char posicionJugador) {
 
         //Comprobamos si el valor esta dentro de los limites del campo
-        if ((posicionJugador == '1') | (posicionJugador == '2') | (posicionJugador == '3') | (posicionJugador == '4') | (posicionJugador == '5') | (posicionJugador == '6') | (posicionJugador == '7') | (posicionJugador == '8') | (posicionJugador == '9')) {
+        if ((posicionJugador == '1') | (posicionJugador == '2') | 
+            (posicionJugador == '3') | (posicionJugador == '4') | 
+            (posicionJugador == '5') | (posicionJugador == '6') | 
+            (posicionJugador == '7') | (posicionJugador == '8') | 
+            (posicionJugador == '9')) {
         } else {
             return false;
         }
@@ -275,35 +285,43 @@ public class TRES_EN_RAYA {
     public static boolean tresEnRaya(char posicionElegida) {
 
         //Comprobamos todos los posibles casos de 3 en raya
-        if ((posicion[0] == posicion[1]) && (posicion[1] == posicion[2]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+        if ((posicion[0] == posicion[1]) && (posicion[1] == posicion[2]) 
+                && (posicion[0] == 'X' || posicion[0] == 'O')) {
             System.out.println("Tres en raya! En la primera fila horizontal.");
             return true;
                 
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) 
+                && (posicion[3] == 'X' || posicion[3] == 'O')) {
             System.out.println("Tres en raya! En la segunda fila horizontal.");
             return true;
             
-        } else if ((posicion[6] == posicion[7]) && (posicion[7] == posicion[8]) && (posicion[6] == 'X' || posicion[6] == 'O')) {
+        } else if ((posicion[6] == posicion[7]) && (posicion[7] == posicion[8]) 
+                && (posicion[6] == 'X' || posicion[6] == 'O')) {
             System.out.println("Tres en raya! En la tercera fila horizontal.");
             return true;
             
-        } else if ((posicion[0] == posicion[3]) && (posicion[3] == posicion[6]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+        } else if ((posicion[0] == posicion[3]) && (posicion[3] == posicion[6]) 
+                && (posicion[0] == 'X' || posicion[0] == 'O')) {
             System.out.println("Tres en raya! En la primera fila vetical.");
             return true;
             
-        } else if ((posicion[1] == posicion[4]) && (posicion[4] == posicion[7]) && (posicion[1] == 'X' || posicion[1] == 'O')) {
+        } else if ((posicion[1] == posicion[4]) && (posicion[4] == posicion[7]) 
+                && (posicion[1] == 'X' || posicion[1] == 'O')) {
             System.out.println("Tres en raya! En la segunda fila vetical.");
             return true;
             
-        } else if ((posicion[2] == posicion[5]) && (posicion[5] == posicion[8]) && (posicion[2] == 'X' || posicion[2] == 'O')) {
+        } else if ((posicion[2] == posicion[5]) && (posicion[5] == posicion[8]) 
+                && (posicion[2] == 'X' || posicion[2] == 'O')) {
             System.out.println("Tres en raya! En la tercera fila vetical.");
             return true;
             
-        } else if ((posicion[0] == posicion[4]) && (posicion[4] == posicion[8]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+        } else if ((posicion[0] == posicion[4]) && (posicion[4] == posicion[8]) 
+                && (posicion[0] == 'X' || posicion[0] == 'O')) {
             System.out.println("Tres en raya! En la diagonal descendente.");
             return true;
             
-        } else if ((posicion[2] == posicion[4]) && (posicion[4] == posicion[6]) && (posicion[2] == 'X' || posicion[2] == 'O')) {
+        } else if ((posicion[2] == posicion[4]) && (posicion[4] == posicion[6]) 
+                && (posicion[2] == 'X' || posicion[2] == 'O')) {
             System.out.println("Tres en raya! En la diagonal ascendente.");
             return true;
         }
