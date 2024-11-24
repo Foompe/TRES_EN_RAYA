@@ -42,7 +42,6 @@ public class TRES_EN_RAYA {
                 case 1: //jugador vs jugador
                     System.out.println("Has seleccionado: Jugador contra jugador.");
 
-                    //falta meter un buble (con controlador de ganador)
                     estadoPartida(posicion);
 
                     //Bucle, que detecta cuando hay un ganador o un empate
@@ -113,13 +112,12 @@ public class TRES_EN_RAYA {
                             }
                         }
                     }
-                    //en funcion de si la seleccion es correcta continuaremos con la jugada.
                     break;
+                    
                 case 2: //jugador vs maquina.
 
                     System.out.println("Has seleccionado: Jugador contra máquina.");
 
-                    //falta meter un buble (con controlador de ganador)
                     estadoPartida(posicion);
 
                     //Bucle, que detecta cuando hay un ganador o un empate
