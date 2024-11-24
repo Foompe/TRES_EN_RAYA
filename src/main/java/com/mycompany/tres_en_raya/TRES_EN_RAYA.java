@@ -33,7 +33,8 @@ public class TRES_EN_RAYA {
             //metodo para resetear los valores
             reset();
 
-            System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n (2) Jugar 1 jugador (contra la máquina) \n (3) Salir.");
+            System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n"
+                    + " (2) Jugar 1 jugador (contra la máquina) \n (3) Salir.");
             //Tomamos la eleccion
             int eleccionJuego = sc.nextInt();
 
@@ -54,7 +55,7 @@ public class TRES_EN_RAYA {
                             //Escoge jugador 1
                             System.out.println("Turno jugador 1, escoge posición en el tablero! (1-9)");
                             String j1jugada = sc.next();
-                            longitud = metodoLongitudCadena(j1jugada);
+                            longitud = comprobarLongitudCadena(j1jugada);
                             if (longitud) {
                                 char j1posicion = j1jugada.charAt(0);
                                 jugadaAceptada = comprobarJugada(j1posicion);
@@ -65,7 +66,7 @@ public class TRES_EN_RAYA {
                                     intercambioPosicionX(j1posicion);
                                     estadoPartida(posicion);
                                     ganador = tresEnRaya(j1posicion);
-                                    empate = metodoEmpate(j1posicion);
+                                    empate = metodoEmpate();
 
                                     //Si se confima que hay tres en raya muestra el mensaje de ganador.
                                     if (ganador) {
@@ -88,7 +89,7 @@ public class TRES_EN_RAYA {
                                 //jugador dos escoge
                                 System.out.println("Turno jugador 2, escoge posición en el tablero! (1-9)");
                                 String j2jugada = sc.next();
-                                longitud = metodoLongitudCadena(j2jugada);
+                                longitud = comprobarLongitudCadena(j2jugada);
                                 if (longitud) {
                                     char j2posicion = j2jugada.charAt(0);
                                     jugadaAceptada = comprobarJugada(j2posicion);
@@ -98,7 +99,7 @@ public class TRES_EN_RAYA {
                                         intercambioPosicionO(j2posicion);
                                         estadoPartida(posicion);
                                         ganador = tresEnRaya(j2posicion);
-                                        empate = metodoEmpate(j2posicion);
+                                        empate = metodoEmpate();
 
                                         if (ganador) {
                                             System.out.println("\nFin de partida: Jugador 2 gana la partida!!\n");
@@ -131,7 +132,7 @@ public class TRES_EN_RAYA {
                             //Escoge jugador 1
                             System.out.println("Turno jugador 1, escoge posición en el tablero! (1-9)");
                             String j1jugada = sc.next();
-                            longitud = metodoLongitudCadena(j1jugada);
+                            longitud = comprobarLongitudCadena(j1jugada);
 
                             //Comprobamos si la longitud de  la palabra es correcta
                             if (longitud) {
@@ -144,7 +145,7 @@ public class TRES_EN_RAYA {
                                     intercambioPosicionX(j1posicion);
                                     estadoPartida(posicion);
                                     ganador = tresEnRaya(j1posicion);
-                                    empate = metodoEmpate(j1posicion);
+                                    empate = metodoEmpate();
 
                                     //Si se confima que hay tres en raya muestra el mensaje de ganador.
                                     if (ganador) {
@@ -185,7 +186,7 @@ public class TRES_EN_RAYA {
                                     intercambioPosicionO(maquinaPosicion);
                                     estadoPartida(posicion);
                                     ganador = tresEnRaya(maquinaPosicion);
-                                    empate = metodoEmpate(maquinaPosicion);
+                                    empate = metodoEmpate();
 
                                     if (ganador) {
                                         System.out.println("\nFin de partida: La máquina ha ganado la partida!!\n");
@@ -213,11 +214,16 @@ public class TRES_EN_RAYA {
 
     //metodo para mostrar la puntuación en pantalla (¿es necesario?)
     public static void estadoPartida(char[] posicion) {
-        System.out.println("\nEstado partida:\n\n   " + posicion[0] + " | " + posicion[1] + " | " + posicion[2] + "\n -------------" + "\n   " + posicion[3] + " | " + posicion[4] + " | " + posicion[5] + "\n -------------" + "\n   " + posicion[6] + " | " + posicion[7] + " | " + posicion[8] + "\n");
+        System.out.println("\nEstado partida:\n\n   " + posicion[0] 
+                + " | " + posicion[1] + " | " + posicion[2] 
+                + "\n -------------" + "\n   " + posicion[3] 
+                + " | " + posicion[4] + " | " + posicion[5] 
+                + "\n -------------" + "\n   " + posicion[6] 
+                + " | " + posicion[7] + " | " + posicion[8] + "\n");
     }
 
     //metodo que comprueba que la longitud del string tomado al jugador no supere un caracter
-    public static boolean metodoLongitudCadena(String palabra) {
+    public static boolean comprobarLongitudCadena(String palabra) {
         
         if (palabra.length() != 1) {
             System.out.println("Entrada no válida, por favor escoge un número entre 1 y 9.");
@@ -230,7 +236,11 @@ public class TRES_EN_RAYA {
     public static boolean comprobarJugada(char posicionJugador) {
 
         //Comprobamos si el valor esta dentro de los limites del campo
-        if ((posicionJugador == '1') | (posicionJugador == '2') | (posicionJugador == '3') | (posicionJugador == '4') | (posicionJugador == '5') | (posicionJugador == '6') | (posicionJugador == '7') | (posicionJugador == '8') | (posicionJugador == '9')) {
+        if ((posicionJugador == '1') | (posicionJugador == '2') | 
+            (posicionJugador == '3') | (posicionJugador == '4') | 
+            (posicionJugador == '5') | (posicionJugador == '6') | 
+            (posicionJugador == '7') | (posicionJugador == '8') | 
+            (posicionJugador == '9')) {
         } else {
             return false;
         }
@@ -275,35 +285,43 @@ public class TRES_EN_RAYA {
     public static boolean tresEnRaya(char posicionElegida) {
 
         //Comprobamos todos los posibles casos de 3 en raya
-        if ((posicion[0] == posicion[1]) && (posicion[1] == posicion[2]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+        if ((posicion[0] == posicion[1]) && (posicion[1] == posicion[2]) 
+                && (posicion[0] == 'X' || posicion[0] == 'O')) {
             System.out.println("Tres en raya! En la primera fila horizontal.");
             return true;
                 
-        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) && (posicion[3] == 'X' || posicion[3] == 'O')) {
+        } else if ((posicion[3] == posicion[4]) && (posicion[4] == posicion[5]) 
+                && (posicion[3] == 'X' || posicion[3] == 'O')) {
             System.out.println("Tres en raya! En la segunda fila horizontal.");
             return true;
             
-        } else if ((posicion[6] == posicion[7]) && (posicion[7] == posicion[8]) && (posicion[6] == 'X' || posicion[6] == 'O')) {
+        } else if ((posicion[6] == posicion[7]) && (posicion[7] == posicion[8]) 
+                && (posicion[6] == 'X' || posicion[6] == 'O')) {
             System.out.println("Tres en raya! En la tercera fila horizontal.");
             return true;
             
-        } else if ((posicion[0] == posicion[3]) && (posicion[3] == posicion[6]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+        } else if ((posicion[0] == posicion[3]) && (posicion[3] == posicion[6]) 
+                && (posicion[0] == 'X' || posicion[0] == 'O')) {
             System.out.println("Tres en raya! En la primera fila vetical.");
             return true;
             
-        } else if ((posicion[1] == posicion[4]) && (posicion[4] == posicion[7]) && (posicion[1] == 'X' || posicion[1] == 'O')) {
+        } else if ((posicion[1] == posicion[4]) && (posicion[4] == posicion[7]) 
+                && (posicion[1] == 'X' || posicion[1] == 'O')) {
             System.out.println("Tres en raya! En la segunda fila vetical.");
             return true;
             
-        } else if ((posicion[2] == posicion[5]) && (posicion[5] == posicion[8]) && (posicion[2] == 'X' || posicion[2] == 'O')) {
+        } else if ((posicion[2] == posicion[5]) && (posicion[5] == posicion[8]) 
+                && (posicion[2] == 'X' || posicion[2] == 'O')) {
             System.out.println("Tres en raya! En la tercera fila vetical.");
             return true;
             
-        } else if ((posicion[0] == posicion[4]) && (posicion[4] == posicion[8]) && (posicion[0] == 'X' || posicion[0] == 'O')) {
+        } else if ((posicion[0] == posicion[4]) && (posicion[4] == posicion[8]) 
+                && (posicion[0] == 'X' || posicion[0] == 'O')) {
             System.out.println("Tres en raya! En la diagonal descendente.");
             return true;
             
-        } else if ((posicion[2] == posicion[4]) && (posicion[4] == posicion[6]) && (posicion[2] == 'X' || posicion[2] == 'O')) {
+        } else if ((posicion[2] == posicion[4]) && (posicion[4] == posicion[6]) 
+                && (posicion[2] == 'X' || posicion[2] == 'O')) {
             System.out.println("Tres en raya! En la diagonal ascendente.");
             return true;
         }
@@ -311,15 +329,15 @@ public class TRES_EN_RAYA {
     }
 
     //metodo para indicar un empate
-    public static boolean metodoEmpate(char eleccion) {
+    public static boolean metodoEmpate() {
 
-        //recorremos todas las posiciones del array, si en una no hay ni x ni o entendemos que quedan espacios para jugar
+        //Recorremos el bucle buscando posiciones ocupadas
         for (int i = 0; i < posicion.length; i++) {
             if (!((posicion[i] == 'X') | (posicion[i] == 'O'))) {
                 return false;
             }
         }
-        //Al no entrar a ningun bucle entendemos que no hay ningun tres en raya ni ningun espacio libre disponible
+        //Aun quedan posiciones libres
         return true;
     }
 
