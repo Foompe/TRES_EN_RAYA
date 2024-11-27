@@ -8,14 +8,19 @@ import java.util.Scanner;
 
 /**
  *
- * @author FP Multip Al iniciar el juego nos aparecerá un menú. Este menú saldrá
+ * @author Rubén Fompedriña Añón
  *
  */
 public class TRES_EN_RAYA {
 
-    //creamos al array con las posiciones dentro del tablero
+    //creamos al array con las posiciones dentro del tablero de juego
     static char[] posicion = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-
+    
+    /** 
+     * Punto de entrada de la aplicación Tres en Raya. 
+     * 
+     * @param args Los argumentos de la línea de comandos (no utilizados). 
+     */
     public static void main(String[] args) {
 
         boolean continuar = true; //inicializamos el controlador de nuestro buble
@@ -42,7 +47,7 @@ public class TRES_EN_RAYA {
                 case 1: //jugador vs jugador
                     System.out.println("Has seleccionado: Jugador contra jugador.");
 
-                    estadoPartida(posicion);
+                    estadoPartida();
 
                     //Bucle, que detecta cuando hay un ganador o un empate
                     while (!ganador && !empate) {
@@ -63,7 +68,7 @@ public class TRES_EN_RAYA {
                                 if (jugadaAceptada) {
                                     System.out.println("Jugador 1 ha escogido: " + j1posicion);
                                     intercambioPosicionX(j1posicion);
-                                    estadoPartida(posicion);
+                                    estadoPartida();
                                     ganador = tresEnRaya(j1posicion);
                                     empate = metodoEmpate();
 
@@ -96,7 +101,7 @@ public class TRES_EN_RAYA {
                                     if (jugadaAceptada) {
                                         System.out.println("Jugador 2 ha escogido: " + j2posicion);
                                         intercambioPosicionO(j2posicion);
-                                        estadoPartida(posicion);
+                                        estadoPartida();
                                         ganador = tresEnRaya(j2posicion);
                                         empate = metodoEmpate();
 
@@ -118,7 +123,7 @@ public class TRES_EN_RAYA {
 
                     System.out.println("Has seleccionado: Jugador contra máquina.");
 
-                    estadoPartida(posicion);
+                    estadoPartida();
 
                     //Bucle, que detecta cuando hay un ganador o un empate
                     while (!ganador && !empate) {
@@ -141,7 +146,7 @@ public class TRES_EN_RAYA {
                                 if (jugadaAceptada) {
                                     System.out.println("Jugador 1 ha escogido: " + j1posicion);
                                     intercambioPosicionX(j1posicion);
-                                    estadoPartida(posicion);
+                                    estadoPartida();
                                     ganador = tresEnRaya(j1posicion);
                                     empate = metodoEmpate();
 
@@ -182,7 +187,7 @@ public class TRES_EN_RAYA {
                                     System.out.println("Turno máquina: ");
                                     System.out.println("La máquina ha escogido: " + maquinaPosicion);
                                     intercambioPosicionO(maquinaPosicion);
-                                    estadoPartida(posicion);
+                                    estadoPartida();
                                     ganador = tresEnRaya(maquinaPosicion);
                                     empate = metodoEmpate();
 
@@ -210,8 +215,10 @@ public class TRES_EN_RAYA {
         sc.close();
     }
 
-    //metodo para mostrar la puntuación en pantalla (¿es necesario?)
-    public static void estadoPartida(char[] posicion) {
+    /**
+     * Este método muestra el campo de juego con las posiciones actualizadas
+     */
+    public static void estadoPartida() {
         System.out.println("\nEstado partida:\n\n   " + posicion[0] 
                 + " | " + posicion[1] + " | " + posicion[2] 
                 + "\n -------------" + "\n   " + posicion[3] 
@@ -220,7 +227,11 @@ public class TRES_EN_RAYA {
                 + " | " + posicion[7] + " | " + posicion[8] + "\n");
     }
 
-    //metodo que comprueba que la longitud del string tomado al jugador no supere un caracter
+    /**
+     * Este método comprueba que el string tomado al usuario no contiene mas de un caracter
+     * @param palabra Toma el valor tomado al usuario
+     * @return Devuelve un boolean en funcion de si cumple o no con las condiciones
+     */
     public static boolean comprobarLongitudCadena(String palabra) {
         
         if (palabra.length() != 1) {
@@ -230,7 +241,11 @@ public class TRES_EN_RAYA {
         return true;
     }
 
-    //metodo para comprobar que la posicion escogida no esta ocupada y esta dentro de los valores
+    /**
+     * Este método comprueba que el valor tomado del string esta dentro de los valores del juego y que la posición está libre.
+     * @param posicionJugador es el valor del primer caracter del string tomado al usuario
+     * @return Devuelve un valor de tipo boolean en función de si cumple los parametros
+     */
     public static boolean comprobarJugada(char posicionJugador) {
 
         //Comprobamos si el valor esta dentro de los limites del campo
@@ -259,7 +274,10 @@ public class TRES_EN_RAYA {
         return false;
     }
 
-    //metodo para cambiar la eleccion por una X
+    /**
+     * Este método cambia la posición escogida por una X dentro de la posicion del array
+     * @param posicionElegida toma el valor del caracter elegido por el usuario
+     */
     public static void intercambioPosicionX(char posicionElegida) {
 
         for (int x = 0; x < posicion.length; x++) {
@@ -269,7 +287,10 @@ public class TRES_EN_RAYA {
         }
     }
 
-    //metodo para cambiar la eleccion por una O
+    /**
+     * Este método cambia la posición escogida por una O dentro de la posicion del array
+     * @param posicionElegida toma el valor del caracter elegido por el usuario
+     */
     public static void intercambioPosicionO(char posicionElegida) {
  
         for (int x = 0; x < posicion.length; x++) {
@@ -279,7 +300,11 @@ public class TRES_EN_RAYA {
         }
     }
 
-    //metodo para comprobar tres en raya
+    /**
+     * Método que comprueba si hay tres posiciones iguales en ciertos indices
+     * @param posicionElegida toma el valor de la posicion escogida
+     * @return Devuelve un boolean si se dan las condiciones
+     */
     public static boolean tresEnRaya(char posicionElegida) {
 
         //Comprobamos todos los posibles casos de 3 en raya
@@ -326,7 +351,10 @@ public class TRES_EN_RAYA {
         return false;
     }
 
-    //metodo para indicar un empate
+    /**
+     * Método que analiza si quedan posiciones libres para seguir jugando
+     * @return Devuelve un boolean si se dan las condiciones
+     */
     public static boolean metodoEmpate() {
 
         //Recorremos el bucle buscando posiciones ocupadas
@@ -339,7 +367,9 @@ public class TRES_EN_RAYA {
         return true;
     }
 
-    //metodo para resetear los valores del array para poder jugar mas de una partida
+    /**
+     * Este método resetea los valores del array al valor original
+     */
     public static void reset() {
 
         //recorremos todas las posiciones del array
