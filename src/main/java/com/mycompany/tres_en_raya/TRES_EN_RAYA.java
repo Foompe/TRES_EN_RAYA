@@ -3,6 +3,7 @@
  */
 package com.mycompany.tres_en_raya;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -34,15 +35,25 @@ public class TRES_EN_RAYA {
             boolean ganador = false;
             boolean empate = false;
             boolean longitud = true;
-
+            boolean entradaValida = false;
+            int eleccionJuego = 0;
+            
             //metodo para resetear los valores
             reset();
-
-            System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n"
-                    + " (2) Jugar 1 jugador (contra la máquina) \n (3) Salir.");
-            //Tomamos la eleccion
-            int eleccionJuego = sc.nextInt();
-
+            
+            while (!entradaValida) {
+                try {
+                    System.out.println("Elige una opción: \n (1) Jugar 2 jugadores. \n"
+                            + " (2) Jugar 1 jugador (contra la máquina) \n (3) Salir.");
+                    //Tomamos la eleccion
+                    eleccionJuego = sc.nextInt();
+                    entradaValida = true; //Si la entrada es valida cambiamos el valor
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada no valida, intentalo de nuevo");
+                    sc.next(); //limpiamos la entrada no valida
+                }
+            }
+            
             switch (eleccionJuego) {
                 case 1: //jugador vs jugador
                     System.out.println("Has seleccionado: Jugador contra jugador.");
